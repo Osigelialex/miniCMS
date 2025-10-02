@@ -8,6 +8,7 @@ import {
 } from "react-router";
 
 import type { Route } from "./+types/root";
+import { Toaster } from "sonner";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -33,12 +34,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        <Toaster position="top-center" richColors />
         {children}
         <ScrollRestoration />
         <Scripts />
       </body>
     </html>
   );
+}
+
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "CMS - Manage your articles with ease" },
+    { name: "description", content: "Welcome to your innovative cms for managing articles" },
+  ];
 }
 
 export default function App() {
