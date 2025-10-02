@@ -5,26 +5,8 @@ import { Edit, Trash2, ArrowLeft, Calendar } from "lucide-react";
 import { Button } from "~/components/ui/Button";
 import { ConfirmDialog } from "~/components/ui/ConfirmationDialog";
 import { useEffect, useState } from "react";
+import { type ViewLoaderData, type LoaderArgs } from "~/types/article";
 import { toast } from "sonner";
-
-interface ViewLoaderData {
-  article: {
-    id: string;
-    title: string;
-    slug: string;
-    content: string;
-    parentId: string | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-}
-
-type LoaderArgs = {
-  request: Request;
-  params: {
-    slug: string;
-  };
-};
 
 export async function loader({ request, params }: LoaderArgs) {
   const article = await prisma.article.findUnique({
@@ -61,7 +43,6 @@ export async function action({ request, params }: LoaderArgs) {
     });
     return redirect("/articles");
   } catch (error) {
-    toast.error("Failed to delete article");
     return { error: "Failed to delete article" };
   }
 }

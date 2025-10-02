@@ -13,18 +13,7 @@ import { Sidebar } from "~/components/Layout/Sidebar";
 import { Header } from "~/components/Layout/Header";
 import { flattenArticles } from "~/utils/helpers";
 import slugify from "slugify";
-
-interface ArticleNode {
-  id: string;
-  title: string;
-  slug: string;
-  parentId: string | null;
-  children: ArticleNode[];
-}
-
-interface LoaderData {
-  articles: ArticleNode[];
-}
+import { type ArticleNode, type CreateArticleLoaderData } from "~/types/article";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const { supabase } = getServerClient(request);
@@ -94,7 +83,7 @@ export async function action({ request }: Route.ActionArgs) {
 }
 
 export default function NewArticle() {
-  const { articles } = useLoaderData<LoaderData>();
+  const { articles } = useLoaderData<CreateArticleLoaderData>();
   const navigate = useNavigate();
   const navigation = useNavigation();
   const [openNodes, setOpenNodes] = useState<Set<string>>(new Set());

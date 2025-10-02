@@ -1,22 +1,10 @@
 import type { Route } from "../+types";
 import { useLoaderData, useNavigate } from "react-router";
 import { prisma } from "~/config/db.server";
-import { File, Eye, Edit, Trash2 } from "lucide-react";
+import { File, Eye, Edit } from "lucide-react";
+import { type IndexLoaderData } from "~/types/article";
 
-interface LoaderData {
-  articles: Array<{
-    id: string;
-    title: string;
-    slug: string;
-    content: string;
-    parentId: string | null;
-    createdAt: Date;
-    updatedAt: Date;
-    _count: { children: number };
-  }>;
-}
-
-export async function loader({ request }: Route.LoaderArgs): Promise<LoaderData> {
+export async function loader({ request }: Route.LoaderArgs): Promise<IndexLoaderData> {
   const articles = await prisma.article.findMany({
     orderBy: {
       createdAt: "desc",
@@ -34,7 +22,7 @@ export async function loader({ request }: Route.LoaderArgs): Promise<LoaderData>
 }
 
 export default function Articles() {
-  const { articles } = useLoaderData<LoaderData>();
+  const { articles } = useLoaderData<IndexLoaderData>();
   const navigate = useNavigate();
 
   const formatDate = (date: Date) => {

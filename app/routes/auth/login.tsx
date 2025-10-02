@@ -1,4 +1,4 @@
-import { Form, redirect, useNavigate } from "react-router";
+import { Form, redirect, useNavigate, useActionData } from "react-router";
 import { useForm } from "react-hook-form"
 import type { Route } from "./+types/login";
 import { getServerClient } from "~/config/supabase.server";
@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "sonner";
 import { Button } from "~/components/ui/Button";
 import { useNavigation } from "react-router";
+import { useEffect } from "react";
 
 interface FormInputs {
   email: string;
@@ -25,7 +26,6 @@ export async function action({ request }: Route.ActionArgs) {
     });
 
     if (error) {
-      toast.error(error.message);
       return { error: error.message }
     }
 
@@ -36,7 +36,6 @@ export async function action({ request }: Route.ActionArgs) {
     return { user: data.user }
   } catch (error: any) {
     if (error instanceof Error) {
-      toast.error(error.message);
       return { error: error.message }
     }
 
@@ -54,7 +53,14 @@ export default function Login() {
 
   const navigate = useNavigate();
   const navigation = useNavigation();
+  const actionData = useActionData<{ error?: string }>();
   const isLoading = navigation.state === "submitting";
+
+  useEffect(() => {
+    if (actionData?.error) {
+      toast.error(actionData.error);
+    }
+  }, [actionData]);
 
   return (
     <main className="min-h-screen grid place-items-center">

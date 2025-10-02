@@ -12,32 +12,7 @@ import { Sidebar } from "~/components/Layout/Sidebar";
 import { Header } from "~/components/Layout/Header";
 import { ConfirmDialog } from "~/components/ui/ConfirmationDialog";
 import { toast } from "sonner";
-
-interface ArticleNode {
-  id: string;
-  title: string;
-  slug: string;
-  parentId: string | null;
-  children: ArticleNode[];
-}
-
-interface LoaderData {
-  article: {
-    id: string;
-    title: string;
-    slug: string;
-    content: string;
-    parentId: string | null;
-  };
-  articles: ArticleNode[];
-}
-
-type ActionArgs = {
-  request: Request;
-  params: {
-    slug: string;
-  };
-};
+import { type ActionArgs, type ArticleNode, type LoaderData } from "~/types/article";
 
 export async function loader({ request, params }: ActionArgs) {
   const { supabase } = getServerClient(request);
@@ -100,7 +75,7 @@ export async function action({ request, params }: ActionArgs) {
   });
 
   if (!article) {
-    throw new Response("Article not found", { status: 404 });
+    throw redirect("/articles");
   }
 
   const formData = await request.formData();
