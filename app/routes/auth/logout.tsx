@@ -10,7 +10,7 @@ export async function action({ request }: { request: Request }) {
       return { error: error.message };
     }
     
-    return redirect("/login", { headers });
+    return redirect("/", { headers });
   } catch (error: any) {
     return { error: error.message || "Something went wrong during logout" };
   }
