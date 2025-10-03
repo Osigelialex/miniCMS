@@ -13,16 +13,16 @@ export async function loader({ request }: Route.LoaderArgs): Promise<IndexLoader
   const { supabase } = getServerClient(request);
   const userResponse = await supabase.auth.getUser();
 
-  if (userResponse.error || !userResponse.data.user) {
-    return { user: null, articles: [] };
-  }
-
   const articles = await prisma.article.findMany({
     orderBy: { createdAt: "desc" },
     include: {
       _count: { select: { children: true } },
     },
   });
+
+  if (userResponse.error || !userResponse.data.user) {
+    return { user: null, articles: articles };
+  }
 
   return { articles, user: userResponse.data.user };
 }
@@ -103,7 +103,7 @@ export default function Articles() {
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="mb-8 flex flex-col justify-start items-start sm:flex-row sm:items-center sm:justify-between gap-4 text-left">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Articles</h1>
             <p className="mt-2 text-sm text-gray-600">

@@ -163,7 +163,7 @@ export default function NewArticle() {
   const navigate = useNavigate();
   const navigation = useNavigation();
   const [openNodes, setOpenNodes] = useState<Set<string>>(new Set());
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedArticleId, setSelectedArticleId] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -222,6 +222,7 @@ export default function NewArticle() {
         parentId: article.parentId || "",
       });
     }
+    setIsSidebarOpen(false);
   };
 
   const handleNewArticle = () => {
@@ -233,6 +234,7 @@ export default function NewArticle() {
       content: "",
       parentId: "",
     });
+    setIsSidebarOpen(false);
   };
 
   const handleDeleteClick = () => {
