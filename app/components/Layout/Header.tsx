@@ -1,4 +1,4 @@
-import { Form, useNavigation } from "react-router";
+import { Form, Link, useNavigation } from "react-router";
 import { X, FileText } from "lucide-react";
 import { Button } from "../ui/Button";
 
@@ -25,7 +25,9 @@ export function Header({ title, isSidebarOpen, onToggleSidebar, onCancel }: Head
             >
               {isSidebarOpen ? <X className="w-5 h-5" /> : <FileText className="w-5 h-5" />}
             </button>
-            <h1 className="sm:text-lg hidden sm:block font-semibold text-neutral-900">{title}</h1>
+            <h1 className="sm:text-lg hidden sm:block font-semibold text-neutral-900 cursor-pointer">
+              {title}
+            </h1>
           </div>
           <div className="flex items-center sm:gap-5 gap-2">
             <Button

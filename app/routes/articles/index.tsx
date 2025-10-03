@@ -4,6 +4,7 @@ import { prisma } from "~/config/db.server";
 import { File, Eye, ListTree } from "lucide-react";
 import { type IndexLoaderData } from "~/types/article";
 import { Button } from "~/components/ui/Button";
+import { Link } from "react-router";
 
 export async function loader({ request }: Route.LoaderArgs): Promise<IndexLoaderData> {
   const articles = await prisma.article.findMany({
@@ -36,6 +37,27 @@ export default function Articles() {
 
   return (
     <main className="min-h-screen bg-white">
+      <header className="w-full border-b border-gray-200 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+          <Link to="/">
+            <h1 className="text-xl font-bold text-gray-900 cursor-pointer">CMS App</h1>
+          </Link>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </Button>
+            <Button
+              onClick={() => navigate("/signup")}
+            >
+              Sign Up
+            </Button>
+          </div>
+        </div>
+      </header>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8 flex items-center justify-between gap-4">
           <div>
@@ -44,12 +66,14 @@ export default function Articles() {
               Manage and view all your articles
             </p>
           </div>
-          <Button
-            icon={<ListTree className="w-4 h-4" />}
-            onClick={() => navigate('/articles/tree')}
-          >
-            Tree View
-          </Button>
+          <div className="flex flex-col items-end">
+            <Button
+              icon={<ListTree className="w-4 h-4" />}
+              onClick={() => navigate('/articles/tree')}
+            >
+              Tree View
+            </Button>
+          </div>
         </div>
 
         <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
