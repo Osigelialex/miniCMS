@@ -352,7 +352,7 @@ export default function NewArticle() {
               onChange={handleContentChange}
               className="min-h-[400px]"
               placeholder="Write your article content..."
-              helperText="Use the toolbar to format your content"
+              helperText="Highlight a text and double-tap a style to apply it"
               required
             />
 
