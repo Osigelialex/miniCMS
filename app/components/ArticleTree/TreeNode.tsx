@@ -36,7 +36,7 @@ export function TreeNode({ node, depth, isOpen, onToggle, onNavigate }: TreeNode
         ) : (
           <div className="w-4" />
         )}
-        <button onClick={() => onNavigate(node.slug)} className="flex items-center gap-2 flex-1 min-w-0">
+        <button onClick={() => onNavigate(node.slug)} className="flex cursor-pointer items-center gap-2 flex-1 min-w-0">
           {hasChildren ? (
             isOpen ? (
               <FolderOpen className="w-4 h-4 text-neutral-600 flex-shrink-0" />

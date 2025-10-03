@@ -8,8 +8,7 @@ export default [
 
   ...prefix("articles", [
     index("routes/articles/index.tsx"),
-    route("new", "routes/articles/new.tsx"),
+    route("tree", "routes/articles/tree.tsx"),
     route(":slug", "routes/articles/detail.tsx"),
-    route(":slug/edit", "routes/articles/edit.tsx"),
   ]),
 ] satisfies RouteConfig;

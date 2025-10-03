@@ -1,8 +1,9 @@
 import type { Route } from "../+types";
 import { useLoaderData, useNavigate } from "react-router";
 import { prisma } from "~/config/db.server";
-import { File, Eye, Edit } from "lucide-react";
+import { File, Eye, ListTree } from "lucide-react";
 import { type IndexLoaderData } from "~/types/article";
+import { Button } from "~/components/ui/Button";
 
 export async function loader({ request }: Route.LoaderArgs): Promise<IndexLoaderData> {
   const articles = await prisma.article.findMany({
@@ -43,12 +44,12 @@ export default function Articles() {
               Manage and view all your articles
             </p>
           </div>
-          <button
-            onClick={() => navigate('/articles/new')}
-            className="inline-flex items-center rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 cursor-pointer"
+          <Button
+            icon={<ListTree className="w-4 h-4" />}
+            onClick={() => navigate('/articles/tree')}
           >
-            New Article
-          </button>
+            Tree View
+          </Button>
         </div>
 
         <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
@@ -143,11 +144,6 @@ export default function Articles() {
                             onClick={() => navigate(`/articles/${article.slug}`)}
                             className="text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
                             <Eye className="w-5 h-5" />
-                          </button>
-                          <button
-                            onClick={() => navigate(`/articles/${article.slug}/edit`)}
-                            className="text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
-                            <Edit className="w-5 h-5" />
                           </button>
                         </div>
                       </td>

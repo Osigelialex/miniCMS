@@ -82,35 +82,14 @@ export default function ViewArticle() {
     <div className="min-h-screen bg-white">
       <header className="border-b border-neutral-200 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={() => navigate("/articles")}
-              icon={<ArrowLeft className="w-4 h-4" />}
-            >
-              Back to Articles
-            </Button>
-            <div className="flex gap-2">
-              <Button
-                type="button"
-                variant="secondary"
-                onClick={() => navigate(`/articles/${article.slug}/edit`)}
-                icon={<Edit className="w-4 h-4" />}
-              >
-                Edit
-              </Button>
-              <Button
-                type="button"
-                variant="secondary"
-                onClick={handleDeleteClick}
-                icon={<Trash2 className="w-4 h-4" />}
-                className="text-red-600 border-red-300 hover:bg-red-50"
-              >
-                Delete
-              </Button>
-            </div>
-          </div>
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={() => navigate("/articles")}
+            icon={<ArrowLeft className="w-4 h-4" />}
+          >
+            Back to Articles
+          </Button>
         </div>
       </header>
 
@@ -118,7 +97,7 @@ export default function ViewArticle() {
         <article>
           <header className="mb-8">
             <h1 className="text-4xl font-bold text-neutral-900 mb-4">
-              {article.title}
+              <div dangerouslySetInnerHTML={{ __html: article.title }} />
             </h1>
             <div className="flex flex-wrap gap-4 text-sm text-neutral-600">
               <div className="flex items-center gap-2">
@@ -136,7 +115,7 @@ export default function ViewArticle() {
 
           <div className="prose prose-neutral max-w-none">
             <div className="whitespace-pre-wrap text-neutral-700 leading-relaxed">
-              {article.content}
+              <div dangerouslySetInnerHTML={{ __html: article.content }} />
             </div>
           </div>
         </article>

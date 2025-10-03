@@ -1,7 +1,6 @@
-import { Form } from "react-router";
+import { Form, useNavigation } from "react-router";
 import { X, FileText } from "lucide-react";
 import { Button } from "../ui/Button";
-import { useNavigation } from "react-router";
 
 interface HeaderProps {
   title: string;
@@ -12,7 +11,7 @@ interface HeaderProps {
 
 export function Header({ title, isSidebarOpen, onToggleSidebar, onCancel }: HeaderProps) {
   const navigation = useNavigation();
-  const isLoggingOut = navigation.state === "submitting"
+  const isLoggingOut = navigation.state === "submitting" && navigation.formData?.get("intent") === "logout";
 
   return (
     <header className="border-b border-neutral-200 bg-white sticky top-0 z-10">
@@ -26,7 +25,7 @@ export function Header({ title, isSidebarOpen, onToggleSidebar, onCancel }: Head
             >
               {isSidebarOpen ? <X className="w-5 h-5" /> : <FileText className="w-5 h-5" />}
             </button>
-            <h1 className="sm:text-lg text-sm font-semibold text-neutral-900">{title}</h1>
+            <h1 className="sm:text-lg hidden sm:block font-semibold text-neutral-900">{title}</h1>
           </div>
           <div className="flex items-center sm:gap-5 gap-2">
             <Button
@@ -37,6 +36,7 @@ export function Header({ title, isSidebarOpen, onToggleSidebar, onCancel }: Head
               Cancel
             </Button>
             <Form method="post" action="/logout">
+              <input type="hidden" name="intent" value="logout" />
               <Button type="submit" variant="primary" isLoading={isLoggingOut}>
                 Logout
               </Button>

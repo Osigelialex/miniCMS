@@ -1,5 +1,5 @@
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "secondary" | "ghost" | "danger";
   isLoading?: boolean;
   icon?: React.ReactNode;
   children: React.ReactNode;
@@ -18,6 +18,7 @@ export function Button({
   
   const variants = {
     primary: "text-white bg-neutral-900 hover:bg-neutral-800",
+    danger: "text-white bg-red-500 hover:bg-red-400",
     secondary: "text-neutral-700 bg-white border border-neutral-300 hover:bg-neutral-50",
     ghost: "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100"
   };
