@@ -26,9 +26,9 @@ export function Header({ title, isSidebarOpen, onToggleSidebar, onCancel }: Head
             >
               {isSidebarOpen ? <X className="w-5 h-5" /> : <FileText className="w-5 h-5" />}
             </button>
-            <h1 className="text-lg font-semibold text-neutral-900">{title}</h1>
+            <h1 className="sm:text-lg text-sm font-semibold text-neutral-900">{title}</h1>
           </div>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center sm:gap-5 gap-2">
             <Button
               type="button"
               variant="ghost"

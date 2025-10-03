@@ -5,7 +5,7 @@ import { getServerClient } from "~/config/supabase.server";
 import { Save } from "lucide-react";
 import type { Route } from "../+types";
 import { Input } from "~/components/ui/Input";
-import { Textarea } from "~/components/ui/Textarea";
+import { RichTextEditor } from "~/components/ui/RichTextEditor";
 import { Select } from "~/components/ui/Select";
 import { Button } from "~/components/ui/Button";
 import { ArticleTree } from "~/components/ArticleTree/ArticleTree";
@@ -138,13 +138,6 @@ export default function NewArticle() {
           />
         </Sidebar>
 
-        {isSidebarOpen && (
-          <div
-            className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-10 top-[73px]"
-            onClick={() => setIsSidebarOpen(false)}
-          />
-        )}
-
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-4xl">
           <Form method="post" className="space-y-6">
             <Input
@@ -185,14 +178,13 @@ export default function NewArticle() {
               ))}
             </Select>
 
-            <Textarea
+            <RichTextEditor
               label="Content"
               name="content"
               id="content"
-              rows={16}
               className="font-mono"
               placeholder="Write your article content in markdown or plain text..."
-              helperText="Supports Markdown formatting"
+              helperText="highlight text and double-tap a style to apply"
               required
             />
 

@@ -4,7 +4,7 @@ import { prisma } from "~/config/db.server";
 import { getServerClient } from "~/config/supabase.server";
 import { Save, Trash2 } from "lucide-react";
 import { Input } from "~/components/ui/Input";
-import { Textarea } from "~/components/ui/Textarea";
+import { RichTextEditor } from "~/components/ui/RichTextEditor";
 import { Select } from "~/components/ui/Select";
 import { Button } from "~/components/ui/Button";
 import { ArticleTree } from "~/components/ArticleTree/ArticleTree";
@@ -186,13 +186,6 @@ export default function EditArticle() {
           />
         </Sidebar>
 
-        {isSidebarOpen && (
-          <div
-            className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-10 top-[73px]"
-            onClick={() => setIsSidebarOpen(false)}
-          />
-        )}
-
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-4xl">
           <Form method="post" className="space-y-6">
             <Input
@@ -220,7 +213,7 @@ export default function EditArticle() {
               name="parentId"
               id="parentId"
               defaultValue={article.parentId || ""}
-              helperText="Organize your article under a parent category"
+              helperText="highlight text and double-tap a style to apply"
             >
               <option value="">None (Top Level)</option>
               {flattenArticles(articles, article.id).map((art) => (
@@ -232,11 +225,10 @@ export default function EditArticle() {
               ))}
             </Select>
 
-            <Textarea
+            <RichTextEditor
               label="Content"
               name="content"
               id="content"
-              rows={16}
               className="font-mono"
               defaultValue={article.content}
               placeholder="Write your article content in markdown or plain text..."
