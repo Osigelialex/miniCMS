@@ -1,3 +1,5 @@
+<img width="1919" height="877" alt="image" src="https://github.com/user-attachments/assets/91a5d238-8a44-48d4-ba6d-c0bbdb2e487e" />
+
 # Mini-CMS for EdTech Test Project
 A simple Content Management System (CMS) built as a test project for a Full-Stack Software Engineer role. The app allows users to create, read, update, and delete (CRUD) blog articles, organized in a tree structure by categories, with a rich text editor for article management. It includes basic authentication using Supabase Auth.
 
@@ -38,15 +40,18 @@ npm install
 ```
 
 3. **Configure Environment Variables**
-Create a .env file in the root directory based on the provided .env.example:
+Create a .env file in the root directory and copy the variables in .env.example:
 ```
 cp .env.example .env
 ```
+
 Update .env with your Supabase credentials:
 ```
 SUPABASE_URL=your-supabase-url
 SUPABASE_ANON_KEY=your-supabase-anon-key
-DATABASE_URL=your-supabase-postgres-url
+DATABASE_URL="postgresql://postgres.[project_ref]:[YOUR-PASSWORD]@aws-1-eu-central-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
+DIRECT_URL="postgresql://postgres.[project_ref]:[YOUR-PASSWORD]@aws-1-eu-central-1.pooler.supabase.com:5432/postgres"
+NODE_ENV=development (production when deploying)
 ```
 
 4. **Set Up the Database**
@@ -63,6 +68,7 @@ npm run dev
 ```
 
 The app will be available at http://localhost:5173.
+
 6. **Deploy to Vercel**
 
 Push the repository to GitHub.
@@ -107,7 +113,7 @@ Go to /editor to create/edit articles in the rich text editor with a collapsible
 **Tree Navigation**: In the editor, expand/collapse categories to view nested articles and select one to edit.
 
 ## Live Demo
-Link to Vercel deployment
+[live demo](https://minicms-iota.vercel.app)
 
 ## Notes
 
