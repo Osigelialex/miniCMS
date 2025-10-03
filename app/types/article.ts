@@ -22,6 +22,7 @@ export interface CreateArticleLoaderData {
 }
 
 export interface IndexLoaderData {
+  user: any,
   articles: Array<{
     id: string;
     title: string;
@@ -58,4 +59,11 @@ export interface ViewLoaderData {
     createdAt: string;
     updatedAt: string;
   };
+}
+
+export interface HeaderProps {
+  title: string;
+  isSidebarOpen: boolean;
+  onToggleSidebar: () => void;
+  onCancel: () => void;
 }
